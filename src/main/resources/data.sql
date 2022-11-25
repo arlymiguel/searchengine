@@ -1,0 +1,14 @@
+insert into `category` (`id`, `parent_category`, `category_name`) values (1,0, 'PARENT');
+insert into `category` (`id`, `parent_category`, `category_name`) values (2,0, 'Furniture');
+insert into `category` (`id`, `parent_category`, `category_name`) values (3,0, 'Electronics');
+insert into `category` (`id`, `parent_category`, `category_name`) values (4,0, 'Home Appliances');
+insert into `category` (`id`, `parent_category`, `category_name`) values (5,4, 'Major Appliances');
+insert into `category` (`id`, `parent_category`, `category_name`) values (6,4, 'Minor Appliances');
+insert into `category` (`id`, `parent_category`, `category_name`) values (7,4, 'Lawn & Garden');
+insert into `category` (`id`, `parent_category`, `category_name`) values (8,5, 'Kitchen Appliances');
+insert into `category` (`id`, `parent_category`, `category_name`) values (8,5, 'General Appliances');
+insert into `keyword` (`id`, `category_id`, `keyword`) values (1,1, 'default');
+insert into `keyword` (`id`, `category_id`, `keyword`) values (2,1, 'defecto');
+insert into `keyword` (`id`, `category_id`, `keyword`) values (3,7, 'Lawn');
+insert into `keyword` (`id`, `category_id`, `keyword`) values (4,7, 'Garden');
+insert into `keyword` (`id`, `category_id`, `keyword`) values (4,7, 'GardeningTools');
