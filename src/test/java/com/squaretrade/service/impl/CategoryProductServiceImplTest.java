@@ -1,5 +1,7 @@
 package com.squaretrade.service.impl;
 
+import com.squaretrade.dto.CategoryProductDto;
+import com.squaretrade.dto.KeyWordDto;
 import com.squaretrade.entity.CategoryProduct;
 import com.squaretrade.entity.KeyWord;
 import com.squaretrade.repository.CategoryRepository;
@@ -32,23 +34,24 @@ public class CategoryProductServiceImplTest {
 
         //given
         Long categoryId = 2L;
-        List<KeyWord> keywords = new ArrayList<>();
-        keywords.add(KeyWord.builder().id(1L).keyword("Furniture").build());
+        List<KeyWordDto> keywordsDto = new ArrayList<>();
+        keywordsDto.add(KeyWordDto.builder().id(1L).keyword("Furniture").build());
 
+        List<KeyWord> keywords  = new ArrayList<>();
         CategoryProduct category = CategoryProduct.builder()
                 .id(2L)
                 .categoryName("Furniture")
                 .keywords( keywords)
                 .build();
-        Optional<CategoryProduct> keywordsFound = Optional.of(category);
+        Optional<CategoryProduct> CategoryFound = Optional.of(category);
 
-        when(categoryRepository.findById(categoryId)).thenReturn(keywordsFound);
+        when(categoryRepository.findById(categoryId)).thenReturn(CategoryFound);
 
         //when
-        keywords = categoryServiceImpl.getKeywordsByCategory(categoryId);
+        keywordsDto = categoryServiceImpl.getKeywordsByCategory(categoryId);
 
         //then
-        Assertions.assertNotNull(keywords);
+        Assertions.assertNotNull(keywordsDto);
     }
 
     @DisplayName("When requested category lvl, it returns all category lvl from parent available in db")
@@ -57,25 +60,36 @@ public class CategoryProductServiceImplTest {
 
         //given
         Long categoryId = 2L;
+        List<KeyWordDto> keywordsDto = new ArrayList<>();
+        keywordsDto.add(KeyWordDto.builder().id(1L).keyword("Furniture").build());
+
+        CategoryProductDto categoryDto = CategoryProductDto.builder()
+                .id(2L)
+                .categoryName("Furniture")
+                .keywords( keywordsDto)
+                .build();
+
+        List<CategoryProductDto> categoryListDto = new ArrayList<>();
+        categoryListDto.add(categoryDto);
+
+
         List<KeyWord> keywords = new ArrayList<>();
         keywords.add(KeyWord.builder().id(1L).keyword("Furniture").build());
-
+        List<CategoryProduct> categoryList = new ArrayList<>();
         CategoryProduct category = CategoryProduct.builder()
                 .id(2L)
                 .categoryName("Furniture")
                 .keywords( keywords)
                 .build();
-
-        List<CategoryProduct> categoryList = new ArrayList<>();
         categoryList.add(category);
 
         when(categoryRepository.findByParentCategory(categoryId)).thenReturn(categoryList);
 
         //when
-        categoryList = categoryServiceImpl.getLvlByCategory(categoryId);
+        categoryListDto = categoryServiceImpl.getLvlByCategory(categoryId);
 
         //then
-        Assertions.assertNotNull(categoryList);
+        Assertions.assertNotNull(categoryListDto);
 
     }
 }

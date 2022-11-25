@@ -1,7 +1,11 @@
 package com.squaretrade.service.impl;
 
+import com.squaretrade.dto.CategoryProductDto;
+import com.squaretrade.dto.KeyWordDto;
 import com.squaretrade.entity.CategoryProduct;
 import com.squaretrade.entity.KeyWord;
+import com.squaretrade.mapper.CategoryProductMapperI;
+import com.squaretrade.mapper.KeywordMapperI;
 import com.squaretrade.repository.CategoryRepository;
 import com.squaretrade.service.CategoryServiceI;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +21,12 @@ public class CategoryServiceImpl implements CategoryServiceI {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<KeyWord> getKeywordsByCategory(Long id) {
+    public List<KeyWordDto> getKeywordsByCategory(Long id) {
 
         Optional<CategoryProduct> list = categoryRepository.findById(id);
 
         if (list.isPresent()) {
-            return list.get().getKeywords().stream().toList();
+            return KeywordMapperI.INSTANCE.toKeyWordDtoList(list.get().getKeywords().stream().toList());
         } else {
             return null;
         }
@@ -30,8 +34,9 @@ public class CategoryServiceImpl implements CategoryServiceI {
     }
 
     @Override
-    public List<CategoryProduct> getLvlByCategory(Long id) {
-        return categoryRepository.findByParentCategory(id);
+    public List<CategoryProductDto> getLvlByCategory(Long id) {
+
+        return CategoryProductMapperI.INSTANCE.toCategoryProductDtoList(categoryRepository.findByParentCategory(id));
     }
 
 }

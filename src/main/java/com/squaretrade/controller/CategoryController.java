@@ -1,5 +1,8 @@
 package com.squaretrade.controller;
 
+import com.squaretrade.dto.CategoryProductDto;
+import com.squaretrade.dto.KeyWordDto;
+import com.squaretrade.entity.CategoryProduct;
 import com.squaretrade.entity.KeyWord;
 import com.squaretrade.service.impl.CategoryServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +20,13 @@ public class CategoryController {
     private final CategoryServiceImpl categoryService;
 
     @GetMapping
-    private List<KeyWord> getKeywordsByCategory(Long id){
+    private List<KeyWordDto> getKeywordsByCategory(Long id){
         return categoryService.getKeywordsByCategory(id);
+    }
+
+    @GetMapping
+    private List<CategoryProductDto> getLvlByCategory(Long id){
+        return categoryService.getLvlByCategory(id);
     }
 
 }

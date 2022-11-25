@@ -1,13 +1,13 @@
 package com.squaretrade.service;
 
-import com.squaretrade.entity.CategoryProduct;
-import com.squaretrade.entity.KeyWord;
+import com.squaretrade.dto.CategoryProductDto;
+import com.squaretrade.dto.KeyWordDto;
 
 import java.util.List;
 
 public interface CategoryServiceI {
 
-    List<KeyWord> getKeywordsByCategory(Long id);
-    List<CategoryProduct> getLvlByCategory(Long id);
+    List<KeyWordDto> getKeywordsByCategory(Long id);
+    List<CategoryProductDto> getLvlByCategory(Long id);
 
 }
